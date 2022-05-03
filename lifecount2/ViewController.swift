@@ -8,19 +8,46 @@
 import UIKit
 
 var players: [player] = [player("player1"), player("player2"), player("player3"), player("player4")]
+var history: [String] = []
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    var history: [String] = []
 
     @IBOutlet weak var playerTable: UITableView!
     @IBOutlet weak var addButton: UIButton!
 
-//    @IBAction func addLife(_ sender: UIButton) {
-//        print(playerTable.indexPathForSelectedRow!)
-//    }
-//    
-
+    
+    func reloadData(){
+        playerTable.reloadData()
+        gameOverDisplay()
+        
+        
+    }
+    
+    @IBAction func changeLife(_ sender: Any) {
+        let button = sender as! UIButton
+        let cell = button.superview?.superview as! TableViewCell
+        let index = playerTable.indexPath(for: cell)
+        let player = players[(index?.row)!]
+        let inputBox = cell.inputBox
+        if(inputBox?.text != ""){
+            if button == cell.addButton {
+                player.addLife(Int(inputBox?.text ?? "0")!)
+                history.append("\(player.name) gains \(inputBox?.text ?? "0") life.")
+            }else{
+                player.subtractLife(Int(inputBox?.text ?? "0")!)
+                history.append("\(player.name) loses \(inputBox?.text ?? "0") life.")
+            }
+        }
+        inputBox!.text = ""
+        if player.gameOver(){
+            player.name += " LOSES!"
+            history.append("\(player.name) Sorry!")
+        }
+        reloadData()
+        
+    }
+    
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -35,7 +62,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         players = [player("player1"), player("player2"), player("player3"), player("player4")]
         history = []
         //clean text input
-        playerTable.reloadData()
+        reloadData()
     }
 
     
@@ -58,6 +85,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return !(players.count - count > 1)
     }
     
+    func gameOverDisplay(){
+        if self.gameOver() {
+            history.append("Game Over!")
+            let alert = UIAlertController(title: "Game Over!", message: "Sorry Please Restart!", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {(_)in
+                    players = [player("player1"), player("player2"), player("player3"), player("player4")]
+                    self.playerTable.reloadData()
+                }))
+            self.present(alert, animated: true)
+        }
+    }
+    
     @IBAction func addPlayer(_ sender: UIButton) {
         //if(gameOver() || gameNotStart()){
         let alert = UIAlertController(title: "Add Player", message: "Pick a name!", preferredStyle: .alert)
@@ -66,7 +105,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let input = alert?.textFields![0]
             if(input?.text != "" && self.gameNotStart()){
                 players.append(player(input!.text!))
-                self.playerTable.reloadData()
+                history.append("\(input?.text ?? "") is added to the game! Welcom!")
+                self.reloadData()
             }
         }))
         self.present(alert, animated: true)
@@ -76,8 +116,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBAction func removePlayer(_ sender: Any) {
         if(players.count > 2 && gameNotStart()){
+            history.append("\(players.last?.name ?? "") is removed from the game.")
             players.removeLast()
-            playerTable.reloadData()
+            reloadData()
         }
     }
 
@@ -89,6 +130,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: TableViewCell = playerTable.dequeueReusableCell(withIdentifier: "playerCell") as! TableViewCell
         cell.playerX.text = players[indexPath.row].name
+        cell.lifeCount.text = String(players[indexPath.row].life)
         return cell
     }
     
@@ -98,8 +140,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         alert.addAction(UIAlertAction(title: "Ok!", style: .default, handler: {[weak alert] (_)in
             let input = alert?.textFields![0]
             if(input?.text != ""){
+                history.append("The name \(players[indexPath.row].name) is changed to\(input?.text ?? "")!")
                 players[indexPath.row].name = input!.text!
-                self.playerTable.reloadData()
+                self.reloadData()
             }
         }))
         self.present(alert, animated: true)

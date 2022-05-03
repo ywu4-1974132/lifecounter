@@ -7,24 +7,34 @@
 
 import UIKit
 
-class HistoryViewController: UIViewController {
+class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var contentText: String = ""
 
     
-    @IBOutlet weak var content: UITextView!
     @IBOutlet weak var goBack: UIButton!
-    
+    @IBOutlet weak var historyTable: UITableView!
     
     @IBAction func backToMain(_ sender: Any) {
         self.dismiss(animated: true)
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return history.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = historyTable.dequeueReusableCell(withIdentifier: "historyCell")
+        cell?.textLabel?.text = history[indexPath.row]
+        return cell!
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        historyTable.delegate = self
+        historyTable.dataSource = self
 
         // Do any additional setup after loading the view.
-        content.text = contentText
     }
     
 

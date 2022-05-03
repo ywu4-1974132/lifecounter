@@ -53,13 +53,13 @@
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="gray" title="+"/>
                                                     <connections>
-                                                        <action selector="addLife:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gj8-wn-CMf"/>
+                                                        <action selector="changeLife:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yx8-gP-MvV"/>
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PlayerX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1oB-Ey-oBz">
-                                                    <rect key="frame" x="16" y="28" width="58" height="21"/>
+                                                    <rect key="frame" x="16" y="28" width="100" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -74,11 +74,17 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="gray" title="-"/>
+                                                    <connections>
+                                                        <action selector="changeLife:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZEz-tl-gOb"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="addButton" destination="inZ-Kr-FWZ" id="QIG-A2-Go1"/>
                                             <outlet property="inputBox" destination="JJd-pq-lxu" id="xCo-DL-IOJ"/>
+                                            <outlet property="lifeCount" destination="oh2-w4-MPU" id="dat-HX-iG5"/>
+                                            <outlet property="minusButton" destination="Z90-tK-hQj" id="BBy-jr-fUa"/>
                                             <outlet property="playerX" destination="1oB-Ey-oBz" id="nEw-3s-Fb0"/>
                                         </connections>
                                     </tableViewCell>
@@ -166,15 +172,21 @@
                                     <action selector="backToMain:" destination="IT7-a2-RdP" eventType="touchUpInside" id="ZyX-hk-R0F"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bzn-Ih-8lX">
-                                <rect key="frame" x="26" y="59" width="240" height="128"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="OhJ-iy-ith">
+                                <rect key="frame" x="0.0" y="54" width="320" height="406"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="historyCell" id="XNb-bh-o29">
+                                        <rect key="frame" x="0.0" y="44.5" width="320" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XNb-bh-o29" id="uOo-cS-6ON">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="RW9-me-4Dc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -184,19 +196,16 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="content" destination="bzn-Ih-8lX" id="jYK-ov-Uas"/>
                         <outlet property="goBack" destination="Pmw-Su-gck" id="Zw8-Hg-Pmf"/>
+                        <outlet property="historyTable" destination="OhJ-iy-ith" id="eM5-EU-Z02"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fqR-iH-lDz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="928" y="68"/>
+            <point key="canvasLocation" x="926.25" y="67.5"/>
         </scene>
     </scenes>
     <resources>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -22,6 +22,9 @@ class TableViewCell: UITableViewCell {
 
     @IBOutlet weak var playerX: UILabel!
     @IBOutlet weak var inputBox: UITextField!
+    @IBOutlet weak var lifeCount: UILabel!
+    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var minusButton: UIButton!
     
 //    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
 //        if let _ = text.rangeOfCharacter(from: NSCharacterSet.decimalDigits){

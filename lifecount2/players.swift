@@ -14,6 +14,7 @@ class player{
     init(_ name: String){
         life = 20
         self.name = name
+
     }
     
     func addLife(_ num: Int){
