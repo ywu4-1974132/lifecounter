@@ -28,9 +28,8 @@
                                     <action selector="addPlayer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3Ky-wg-eYY"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eeP-68-R9S">
-                                <rect key="frame" x="0.0" y="125" width="320" height="355"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eeP-68-R9S">
+                                <rect key="frame" x="0.0" y="149" width="320" height="331"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="playerCell" rowHeight="86" id="BZM-tz-BCK" customClass="TableViewCell" customModule="lifecount2" customModuleProvider="target">
@@ -131,9 +130,13 @@
                             <constraint firstItem="ynk-6Y-JeG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="6R9-U1-Y25"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="IcK-pN-bxX" secondAttribute="trailing" constant="16" id="Kw7-At-kpf"/>
                             <constraint firstItem="kNY-AZ-QCy" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="P9s-Xz-t57"/>
+                            <constraint firstItem="eeP-68-R9S" firstAttribute="top" secondItem="2Qf-zs-unq" secondAttribute="bottom" constant="57" id="YYo-68-Wmp"/>
                             <constraint firstItem="kNY-AZ-QCy" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="bJD-Fw-rXd"/>
+                            <constraint firstItem="eeP-68-R9S" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="bgT-e3-vKt"/>
                             <constraint firstItem="IcK-pN-bxX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="di9-aw-JQW"/>
                             <constraint firstItem="2Qf-zs-unq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="65" id="e5n-80-Z3T"/>
+                            <constraint firstItem="eeP-68-R9S" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ehE-4a-rJF"/>
+                            <constraint firstItem="eeP-68-R9S" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="fzu-5q-ATh"/>
                             <constraint firstItem="ynk-6Y-JeG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="hit-HZ-soO"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oq1-fL-d7f" secondAttribute="trailing" constant="71" id="kQf-1B-azd"/>
                             <constraint firstItem="oq1-fL-d7f" firstAttribute="top" secondItem="kNY-AZ-QCy" secondAttribute="bottom" constant="16" id="oFs-3f-lVL"/>

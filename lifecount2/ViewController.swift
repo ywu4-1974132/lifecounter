@@ -31,12 +31,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let player = players[(index?.row)!]
         let inputBox = cell.inputBox
         if(inputBox?.text != ""){
-            if button == cell.addButton {
-                player.addLife(Int(inputBox?.text ?? "0")!)
-                history.append("\(player.name) gains \(inputBox?.text ?? "0") life.")
+            if Int(inputBox?.text ?? "0") == nil {
+                let alert = UIAlertController(title: "Attention!", message: "You can only put numbers in the box!", preferredStyle: .alert)
+                //alert.addAction(UIAlertAction(title: "OK", style: .default))
+                let action = UIAlertAction(title: "ok", style: .default) { _ in
+                    self.view.endEditing(true)
+                }
+                alert.addAction(action)
+                playerTable.reloadData()
+                self.present(alert, animated: true)
             }else{
-                player.subtractLife(Int(inputBox?.text ?? "0")!)
-                history.append("\(player.name) loses \(inputBox?.text ?? "0") life.")
+                if button == cell.addButton {
+                    player.addLife(Int(inputBox?.text ?? "0")!)
+                    history.append("\(player.name) gains \(inputBox?.text ?? "0") life.")
+                }else{
+                    player.subtractLife(Int(inputBox?.text ?? "0")!)
+                    history.append("\(player.name) loses \(inputBox?.text ?? "0") life.")
+                }
             }
         }
         inputBox!.text = ""
